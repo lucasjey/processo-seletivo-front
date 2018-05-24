@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-md-12">
+
+    <!-- AQUI -->
+    <a class="btn btn-primary" [routerLink]="['/unidade/novo']">
+      <i class="fa fa-plus"></i>
+      <span>Novo</span>
+    </a>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <section class="panel">
+      <div class="panel-body">
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped table-bordered dataTable">
+          <thead>
+
+            <!-- AQUI -->
+            <tr>
+              <th>Código</th>
+              <th>Nome</th>
+              <th>Numero Fiscal</th>
+              <th class="no-sort text-center">Ações</th>
+            </tr>
+
+          </thead>
+          <tbody>
+
+            <!-- AQUI -->
+            <tr *ngFor="let unidade of unidades; let i = index">
+              <td>{{unidade.codigo}}</td>
+              <td><a [routerLink]="['/unidade/visualizar', unidade.id]">{{unidade.nome}}</a></td>
+              <td>{{unidade.numeroFiscal}}</td>
+              <td class="text-center">
+                <a class="btn btn-default" rel="tooltip" data-placement="top" [routerLink]="['/unidade/alterar', unidade.id]" title="" data-original-title="Alterar">
+                  <i class="fa fa-pencil"></i>
+                </a>
+                <a class="btn btn-default modal-confirm" (click)="openModal(template, unidade, i)" data-url="#">
+                  <i class="fa fa-trash"></i>
+                </a>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+
+        <ng-template #template>
+          <div class="modal-body text-center">
+            <p>Deseja realmente excluir a unidade {{selectedUnidade.nome}}</p>
+            <button type="button" class="btn btn-default" (click)="deleteUnidade()">Sim</button>
+            <button type="button" class="btn btn-primary" (click)="hideModal()">Não</button>
+          </div>
+        </ng-template>
+
+      </div>
+    </section>
+  </div>
+</div>

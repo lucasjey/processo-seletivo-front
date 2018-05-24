@@ -8,9 +8,9 @@ describe('MantenedoraDetailsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MantenedoraDetailsComponent ]
+      declarations: [MantenedoraDetailsComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

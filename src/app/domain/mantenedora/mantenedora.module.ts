@@ -15,6 +15,7 @@ import { MantenedoraService } from "./mantenedora.service";
 import { MantenedoraDetailsComponent } from "./mantenedora-details/mantenedora-details.component";
 import { MantenedoraFormComponent } from "./mantenedora-form/mantenedora-form.component";
 import { MantenedoraListComponent } from "./mantenedora-list/mantenedora-list.component";
+import { EnderecoService } from '../endereco/endereco.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { MantenedoraListComponent } from "./mantenedora-list/mantenedora-list.co
   ],
   providers: [
     // services
-    MantenedoraService
+    MantenedoraService,
+    EnderecoService,
   ]
 })
 export class MantenedoraModule { }

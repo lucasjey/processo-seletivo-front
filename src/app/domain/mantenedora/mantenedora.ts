@@ -1,7 +1,9 @@
+import { Endereco } from "../endereco/endereco";
+
 export class Mantenedora {
     id: number;
-    codigo: string;
     nome: string;
+    codigo: string;
     numeroFiscal: number;
-    endereco: string;
+    endereco: Endereco;
 }

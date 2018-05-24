@@ -18,19 +18,19 @@ import { CustomErrorHandler } from "./customErrorHandler"
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.router';
 
-// LAYOUT
-// import { LayoutDefaultComponent } from './_layout/layout-default/layout-default.component';
-// import { LayoutSingleComponent } from './_layout/layout-single/layout-single.component';
 
 //SHARED
 import { SharedModule } from "./shared/shared.module";
-import { MenuComponent } from './_layout/menu/menu.component';
+
 import { CommonModule } from '@angular/common';
+import { SidebarComponent } from './_layout/sidebar/sidebar.component';
+import { NavbarComponent } from './_layout/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MenuComponent
+    SidebarComponent,
+    NavbarComponent
 
   ],
   imports: [

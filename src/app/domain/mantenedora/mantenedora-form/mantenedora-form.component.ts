@@ -36,16 +36,21 @@ export class MantenedoraFormComponent implements OnInit {
     /* Obter o `ID` passado por parâmetro na URL */
     this.mantenedora.id = this.route.snapshot.params['id'];
 
-    /* Define o titulo da página */
-    // this.layout.title = (this.mantenedora.id == null) ? 'Nova Mantenedora' : 'Alterar Mantenedora';
-
     /* Reactive Forms */
     this.mantenedoraForm = this.builder.group({
-      id:[],
+      id: [],
       codigo: [null, [Validators.required, Validators.maxLength(3)]],
       nome: [null, [Validators.required, Validators.maxLength(80)]],
       numeroFiscal: [null, [Validators.required, Validators.maxLength(20)]],
-      endereco: [null, [Validators.required, Validators.maxLength(50)]]
+      endereco: this.builder.group({
+        logradouro: '',
+        bairro: '',
+        numero: '',
+        caixaPostal: '',
+        pais: '',
+        provincia: '',
+        municipio: ''
+      })
     }, {});
 
     // Se existir `ID` realiza busca para trazer os dados

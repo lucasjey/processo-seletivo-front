@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, NgModule, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FileUploader } from 'ng2-file-upload';
 
 import { MantenedoraService } from "../mantenedora.service";
 import { Mantenedora } from "../mantenedora";
+import { Observable } from 'rxjs/Observable';
+import { CURRENCYMASKDIRECTIVE_VALUE_ACCESSOR } from 'ng2-currency-mask';
+import { FormControl } from '@angular/forms/src/model';
 
 @Component({
   selector: 'app-mantenedora-details',
@@ -16,10 +20,13 @@ export class MantenedoraDetailsComponent implements OnInit {
   mantenedoraForm: FormGroup;
 
   constructor(
+
     private route: ActivatedRoute,
     private router: Router,
     private builder: FormBuilder,
-    public mantenedoraService: MantenedoraService
+    private imagem: FormBuilder,
+    public mantenedoraService: MantenedoraService,
+
   ) { }
 
   ngOnInit() {
@@ -29,27 +36,41 @@ export class MantenedoraDetailsComponent implements OnInit {
     /* Obter o `ID` passado por parâmetro na URL */
     this.mantenedora.id = this.route.snapshot.params['id'];
 
-    /* Define o titulo da página */
-    // this.layout.title = 'Visualizar Mantenedora';
-
     /* Reactive Forms */
     this.mantenedoraForm = this.builder.group({
       id: [],
-      codigo: this.builder.control('', [Validators.required, Validators.maxLength(3)]),
-      nome: this.builder.control('', [Validators.required, Validators.maxLength(80)]),
-      numeroFiscal: this.builder.control('', [Validators.required, Validators.maxLength(20)]),
-      endereco: this.builder.control('', [Validators.required, Validators.maxLength(50)]),
+      codigo: [null, [Validators.required, Validators.maxLength(3)]],
+      nome: [null, [Validators.required, Validators.maxLength(80)]],
+      numeroFiscal: [null, [Validators.required, Validators.maxLength(20)]],
+      endereco: this.builder.group({
+        logradouro: '',
+        bairro: '',
+        numero: '',
+        caixaPostal: '',
+        pais: '',
+        provincia: '',
+        municipio: ''
+      })
     }, {});
 
-    // Desabilitar formulário para edição
     this.mantenedoraForm.disable();
 
     // Se existir `ID` realiza busca para trazer os dados
     if (this.mantenedora.id != null) {
       this.mantenedoraService.findOne(this.mantenedora.id)
         .subscribe(mantenedora => {
-          this.mantenedoraForm = this.builder.group(mantenedora, {})
-        })
+          this.mantenedoraForm.patchValue(mantenedora);
+        });
     }
   }
+
+  /* Método para salva mantenedora */
+  salvar(mantenedora: Mantenedora) {
+    this.mantenedoraService.save(mantenedora)
+      .subscribe(response => {
+        /* Redireciona para lista */
+        this.router.navigate(['/mantenedora']);
+      })
+  }
+
 }

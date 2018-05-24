@@ -5,18 +5,12 @@ const appRoutes: Routes = [
 
   {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
   {path: 'dashboard', loadChildren: 'app/domain/dashboard/dashboard.module#DashboardModule'},
-  {path: 'mantenedora', loadChildren: 'app/domain/mantenedora/mantenedora.module#MantenedoraModule'}
+  {path: 'mantenedora', loadChildren: 'app/domain/mantenedora/mantenedora.module#MantenedoraModule'},
+  {path: 'instituicao', loadChildren: 'app/domain/instituicao/instituicao.module#InstituicaoModule'},
+  {path: 'unidade', loadChildren: 'app/domain/unidade/unidade.module#UnidadeModule'}
 
 ];
 
-/*
-children: [
-      {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
-      {path: 'dashboard', loadChildren: 'app/domain/dashboard/dashboard.module#DashboardModule'},
-      {path: 'pais', loadChildren: 'app/domain/pais/pais.module#PaisModule'},
-      {path: 'estado', loadChildren: 'app/domain/estado/estado.module#EstadoModule'}
-    ]
-*/
 
 @NgModule({
   imports: [

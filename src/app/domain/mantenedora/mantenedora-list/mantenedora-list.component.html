@@ -19,7 +19,6 @@
 
             <!-- AQUI -->
             <tr>
-              <th>#ID</th>
               <th>Código</th>
               <th>Nome</th>
               <th>Numero Fiscal</th>
@@ -31,12 +30,14 @@
 
             <!-- AQUI -->
             <tr *ngFor="let mantenedora of mantenedoras; let i = index">
-              <td>{{mantenedora.id}}</td>
               <td>{{mantenedora.codigo}}</td>
-              <td><a [routerLink]="['/mantenedora/visualizar', mantenedora.id]">{{mantenedora.nome}}</a></td>
+              <td>
+                <a [routerLink]="['/mantenedora/visualizar', mantenedora.id]">{{mantenedora.nome}}</a>
+              </td>
               <td>{{mantenedora.numeroFiscal}}</td>
               <td class="text-center">
-                <a class="btn btn-default" rel="tooltip" data-placement="top" [routerLink]="['/mantenedora/alterar', mantenedora.id]" title="" data-original-title="Alterar">
+                <a class="btn btn-default" rel="tooltip" data-placement="top" [routerLink]="['/mantenedora/alterar', mantenedora.id]" title=""
+                  data-original-title="Alterar">
                   <i class="fa fa-pencil"></i>
                 </a>
                 <a class="btn btn-default modal-confirm" (click)="openModal(template, mantenedora, i)" data-url="#">
